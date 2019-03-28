@@ -9,11 +9,20 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       user_id: {
-        type: Sequelize.STRING
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
+        references: {
+          model: "users"
+        }
       },
-      tool_id: {
-        type: Sequelize.STRING
-      },
+        tool_id: {
+          allowNull: false,
+          type: Sequelize.INTEGER,
+          onDelete: "CASCADE",
+          references: {
+            model: "tools"
+          }},
       date: {
         type: Sequelize.DATE
       },

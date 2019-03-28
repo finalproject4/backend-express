@@ -24,13 +24,13 @@ router.get('/api/tool/:id', (req, res) => {
         }).catch(e => console.log(e));
 
 });
-router.post('/api/tools', (req, res) => {
+router.post('/api/user/:id/tools', (req, res) => {
 
     models.Tool.create({
         price: req.body.price,
         type: req.body.type,
         quantity: req.body.quantity,
-        user_id: req.body.user_id
+        user_id: req.params.id
     })
         .then(tool => {
 
@@ -49,7 +49,7 @@ router.put('/api/tool/:id', (req, res) => {
                 price: req.body.price,
                 type: req.body.type,
                 quantity: req.body.quantity,
-                user_id: req.body.user_id
+                
 
             }).then(
                 res.status(200).json({ tool: tool }
@@ -67,7 +67,7 @@ router.delete('/api/tool/:id', (req, res) => {
         .then(tool => {
 
             tool.destroy().then(
-                res.status(200).json("deleted succefully")
+                res.status(200).json({result:`Tool ID ${req.params.id} Deleted`})
 
             )
 
@@ -77,4 +77,19 @@ router.delete('/api/tool/:id', (req, res) => {
 
 
 });
+router.get('/api/user/:id/tools' , (req, res) =>{
+    const  id = req.params.id
+    models.User.findByPk(id , 
+     {include: 
+         [{model: models.Tool}]
+     }
+     )
+    .then( user =>{
+     res.status(200).json({user: user})
+    })
+    .catch( e => console.log(e))
+  
+  
+  })
 export default router;
+
