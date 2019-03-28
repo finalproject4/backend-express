@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     user_id: DataTypes.STRING,
     tool_id: DataTypes.STRING,
     date: DataTypes.DATE
-  }, { tableName: "reservation"});
+  }, { tableName: "reservations"});
   Reservation.associate = function(models) {
     Reservation.belongsTo(models.User, {
       foreignKey: "user_id"
