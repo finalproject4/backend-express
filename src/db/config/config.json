@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "ghadeer",
+    "username": "sq",
     "password": null,
-    "database": "database_development",
+    "database": "events_database",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "define": {

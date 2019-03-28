@@ -13,7 +13,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         field: "hashed_password",
         allowNull: false
-      }
+      },
+      first_name: DataTypes.STRING,
+      last_name: DataTypes.STRING,
+      phone_number: DataTypes.STRING
     },
     {
       tableName: "users",
@@ -39,7 +42,15 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.associate = models => {
-    // associations can be defined here
+    User.hasMany(models.Tool, {
+      foreignKey: "user_id",
+      onDelete: "CASCADE"
+    }),
+      User.hasMany(models.Reservation, {
+        foreignKey: "user_id",
+        onDelete: "CASCADE"
+
+      })
   };
   return User;
 };
