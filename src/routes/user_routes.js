@@ -27,11 +27,16 @@ router.post("/sign-up", (req, res, next) => {
       } else {
         return User.create({
           email: credentials.email,
-          hashedPassword: credentials.password
-        });
+          hashedPassword: credentials.password,
+          first_name: credentials.first_name,
+          last_name: credentials.last_name,
+          phone_number: credentials.phone_number
+        })
       }
     })
     .then(user => {
+
+   
       const payload = {
         id: user.id,
         email: user.email,
@@ -55,7 +60,7 @@ router.post("/sign-up", (req, res, next) => {
       });
     })
     // pass any errors along to the error handler
-    .catch(next);
+    .catch(e => next(e));
 });
 
 router.post("/sign-in", localAuth, (req, res, next) => {
