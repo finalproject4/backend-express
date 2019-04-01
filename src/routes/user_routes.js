@@ -114,6 +114,38 @@ router.patch("/change-password", tokenAuth, (req, res, next) => {
     .catch(next);
 });
 
+router.get('/api/user/:id', (req, res) => {
+  models.User.findByPk(req.params.id)
+      .then(user => {
 
+          res.status(200).json({ user: user })
+
+
+
+      }).catch(e => console.log(e));
+
+});
+
+router.put('/api/user/:id', (req, res) => {
+  models.User.findByPk(req.params.id)
+      .then(user => {
+
+          user.update({  
+              first_name: req.body.user.first_name,
+              last_name: req.body.user.last_name,
+              email:req.body.user.email,
+              phone_number:req.body.user.phone_number
+              
+          }).then(
+              res.status(200).json({ user: user }
+
+              ))
+
+
+      }).catch(e => console.log(e));
+
+
+
+});
 
 export default router;
