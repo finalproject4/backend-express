@@ -3,7 +3,7 @@ import models from '../db/models';
 
 const router = express.Router();
 
-router.get('/api/user/:id', (req, res) => {
+router.get('/api/user/:id/res', (req, res) => {
  
    
     const id = req.params.id
@@ -12,8 +12,8 @@ router.get('/api/user/:id', (req, res) => {
          [{model: models.Reservation}]
      }
      )
-    .then( reservations =>{
-     res.status(200).json({reservations: reservations})
+    .then( user =>{
+     res.status(200).json({user: user})
     })
     .catch( e => console.log(e))
 });

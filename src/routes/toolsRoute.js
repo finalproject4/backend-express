@@ -33,7 +33,6 @@ router.post('/api/user/:id/tools', (req, res) => {
         user_id: req.params.id
     })
         .then(tool => {
-
             res.status(200).json({ tool: tool })
 
 
@@ -79,12 +78,13 @@ router.delete('/api/tool/:id', (req, res) => {
 });
 router.get('/api/user/:id/tools' , (req, res) =>{
     const  id = req.params.id
+    console.log(id)
     models.User.findByPk(id , 
      {include: 
          [{model: models.Tool}]
-     }
-     )
+     })
     .then( user =>{
+        console.log(user)
      res.status(200).json({user: user})
     })
     .catch( e => console.log(e))
