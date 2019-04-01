@@ -5,10 +5,10 @@ module.exports = {
     
      
     return queryInterface.bulkInsert('tools', [
-      { price: 44, type: 'lights', quantity: 3 ,created_at: new Date, updated_at: new Date, user_id: 1 },
-      { price: 45, type: 'speakers', quantity: 7 ,created_at: new Date, updated_at: new Date, user_id: 2 },
-      { price: 45, type: 'test', quantity: 7 ,created_at: new Date, updated_at: new Date ,user_id: 1},
-      { price: 45, type: 'test', quantity: 7 ,created_at: new Date, updated_at: new Date ,user_id:2}
+      { price: 44, type: 'lights', quantity: 3 ,created_at: new Date, updated_at: new Date, user_id: 17 },
+      { price: 45, type: 'speakers', quantity: 7 ,created_at: new Date, updated_at: new Date, user_id: 17 },
+      { price: 45, type: 'test', quantity: 7 ,created_at: new Date, updated_at: new Date , user_id: 17},
+      { price: 45, type: 'test', quantity: 7 ,created_at: new Date, updated_at: new Date , user_id:17}
     ], {});
   },
 

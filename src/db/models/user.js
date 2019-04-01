@@ -46,6 +46,10 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "user_id",
       onDelete: "CASCADE"
     }),
+    User.hasMany(models.Hall, {
+      foreignKey: "user_id",
+      onDelete: "CASCADE"
+    }),
       User.hasMany(models.Reservation, {
         foreignKey: "user_id",
         onDelete: "CASCADE"

@@ -3,7 +3,7 @@ import models from '../db/models';
 
 const router = express.Router();
 
-router.get('/api/user/:id/res', (req, res) => {
+router.get('/api/user/:id/hres', (req, res) => {
  
    
     const id = req.params.id
@@ -18,13 +18,13 @@ router.get('/api/user/:id/res', (req, res) => {
     .catch( e => console.log(e))
 });
 
-router.post('/api/user/:user_id/tool/:id', (req, res) => {
-    const tool_id = req.params.id
+router.post('/api/user/:user_id/hall/:id', (req, res) => {
+    const hall_id = req.params.id
     const user_id = req.params.user_id
 
-    models.Reservation.create({
+    models.Hreservation.create({
         user_id: user_id,
-        tool_id: tool_id,
+        hall_id: hall_id,
         date: req.body.date
     })
         .then(reservation => {
@@ -37,7 +37,7 @@ router.post('/api/user/:user_id/tool/:id', (req, res) => {
 
 });
 
-router.patch('/api/reservations/:id', (req, res) => {
+router.put('/api/hreservation/:id', (req, res) => {
     models.Reservation.findByPk(req.params.id)
         .then(reservation => {
 
@@ -56,7 +56,7 @@ router.patch('/api/reservations/:id', (req, res) => {
 
 
 });
-router.delete('/api/reservations/:id', (req, res) => {
+router.delete('/api/hreservation/:id', (req, res) => {
     models.Reservation.findByPk(req.params.id)
         .then(reservation => {
 
