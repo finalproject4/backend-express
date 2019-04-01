@@ -4,7 +4,7 @@ import models from '../db/models';
 const router = express.Router();
 
 router.get('/api/halls', (req, res) => {
-    models.Tool.findAll()
+    models.Hall.findAll()
         .then(halls => {
 
             res.status(200).json({ halls: halls })
@@ -14,7 +14,7 @@ router.get('/api/halls', (req, res) => {
 });
 
 router.get('/api/hall/:id', (req, res) => {
-    models.Tool.findByPk(req.params.id)
+    models.Hall.findByPk(req.params.id)
         .then(hall => {
 
             res.status(200).json({ hall: hall })
@@ -24,14 +24,32 @@ router.get('/api/hall/:id', (req, res) => {
         }).catch(e => console.log(e));
 
 });
+
+router.get('/api/user/:id/halls', (req, res) => {
+    const  id = req.params.id
+    models.User.findByPk(id , 
+     {include: 
+         [{model: models.Hall}]
+     })
+    .then( user => {
+        console.log(user)
+     res.status(200).json({user: user})
+    })
+    .catch( e => console.log(e))
+  
+  
+  });
+
 router.post('/api/user/:id/halls', (req, res) => {
 
     models.Hall.create({
+        name: req.body.name,
         price: req.body.price,
         type: req.body.type,
         location: req.body.location,
         size: req.body.size,
-        section: req.body.section
+        section: req.body.section,
+        user_id: req.params.id
     
     })
         .then(hall => {
@@ -47,11 +65,12 @@ router.put('/api/hall/:id', (req, res) => {
         .then(hall => {
 
             hall.update({
+                name: req.body.hall.name,
                 price: req.body.hall.price,
                 type: req.body.hall.type,
                 location: req.body.hall.location,
-                size: req.body.size,
-                section: req.body.section
+                size: req.body.hall.size,
+                section: req.body.hall.section
 
             }).then(
                 res.status(200).json({ hall: hall }
@@ -79,20 +98,6 @@ router.delete('/api/hall/:id', (req, res) => {
 
 
 });
-router.get('/api/user/:id/halls' , (req, res) =>{
-    const  id = req.params.id
-    console.log(id)
-    models.User.findByPk(id , 
-     {include: 
-         [{model: models.Hall}]
-     })
-    .then( user =>{
-        console.log(user)
-     res.status(200).json({user: user})
-    })
-    .catch( e => console.log(e))
-  
-  
-  })
+
 export default router;
 

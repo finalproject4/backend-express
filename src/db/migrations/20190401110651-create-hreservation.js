@@ -16,12 +16,12 @@ module.exports = {
           model: "users"
         }
       },
-      tool_id: {
+      hall_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
         onDelete: "CASCADE",
         references: {
-          model: "tools"
+          model: "halls"
         }
       },
       date: {

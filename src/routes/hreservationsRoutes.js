@@ -22,7 +22,7 @@ router.post('/api/user/:user_id/hall/:id', (req, res) => {
     const hall_id = req.params.id
     const user_id = req.params.user_id
 
-    models.Reservation.create({
+    models.Hreservation.create({
         user_id: user_id,
         hall_id: hall_id,
         date: req.body.date

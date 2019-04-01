@@ -9,8 +9,8 @@ module.exports = {
       Example:
       */
       return queryInterface.bulkInsert('reservations', [{
-        user_id: 1,
-        tool_id: 1,
+        user_id: 17,
+        tool_id: 34,
         date: new Date,
         created_at: new Date,
         updated_at: new Date
