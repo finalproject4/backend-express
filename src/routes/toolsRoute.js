@@ -46,9 +46,9 @@ router.put('/api/tool/:id', (req, res) => {
         .then(tool => {
 
             tool.update({
-                price: req.body.price,
-                type: req.body.type,
-                quantity: req.body.quantity,
+                price: req.body.tool.price,
+                type: req.body.tool.type,
+                quantity: req.body.tool.quantity,
                 
 
             }).then(
