@@ -10,6 +10,11 @@ module.exports = (sequelize, DataTypes) => {
     Tool.belongsTo(models.User, {
       foreignKey: "user_id"
     })
+    Tool.hasMany(models.Reservation, {
+      foreignKey: "tool_id",
+      onDelete: "CASCADE"
+
+    })
   };
   return Tool;
 };

@@ -14,7 +14,9 @@ router.get('/api/tools', (req, res) => {
 });
 
 router.get('/api/tool/:id', (req, res) => {
-    models.Tool.findByPk(req.params.id)
+    models.Tool.findByPk(req.params.id,    
+        {include: [{model: models.Reservation}]
+    })
         .then(tool => {
 
             res.status(200).json({ tool: tool })
