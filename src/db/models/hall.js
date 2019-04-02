@@ -11,6 +11,11 @@ module.exports = (sequelize, DataTypes) => {
   Hall.associate = function(models) {
     Hall.belongsTo(models.User, {
       foreignKey: "user_id"
+    }),
+    Hall.hasMany(models.Hreservation, {
+      foreignKey: "hall_id",
+      onDelete: "CASCADE"
+
     })
   };
   return Hall;

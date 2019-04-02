@@ -9,6 +9,9 @@ module.exports = (sequelize, DataTypes) => {
     Hreservation.belongsTo(models.User, {
       foreignKey: "user_id"
     })
+    Hreservation.belongsTo(models.Hall, {
+      foreignKey: "hall_id"
+    })
   };
   return Hreservation;
 };
