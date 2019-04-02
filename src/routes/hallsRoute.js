@@ -14,7 +14,9 @@ router.get('/api/halls', (req, res) => {
 });
 
 router.get('/api/hall/:id', (req, res) => {
-    models.Hall.findByPk(req.params.id)
+    models.Hall.findByPk(req.params.id, 
+        {include: [{model: models.Hreservation}]
+    })
         .then(hall => {
 
             res.status(200).json({ hall: hall })
