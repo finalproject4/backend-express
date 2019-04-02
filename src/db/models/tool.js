@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     })
     Tool.hasMany(models.Reservation, {
       foreignKey: "tool_id",
-      onDelete: "CASCADE"
+      onDelete: "CASCADE",
+      as: "reservations"
 
     })
   };

@@ -72,6 +72,29 @@ router.delete('/api/reservations/:id', (req, res) => {
 
 });
 
+router.get('/api/user/:id/cres', (req, res) => {
+ 
+    const id = req.params.id
+    models.Tool.findAll({
+        attributes: ["type", "price"],
+        include: [
+          {
+            model: models.Reservation,
+            attributes: ["date"],
+            as: "reservations"
+          }
+        ],
+        where: {
+            user_id: id
+          }
+        
+      })
+    .then( user =>{
+     res.status(200).json({user: user})
+    })
+    .catch( e => console.log(e))
+});
+
 
   
 export default router;
