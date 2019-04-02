@@ -9,7 +9,7 @@ router.get('/api/user/:id/hres', (req, res) => {
     const id = req.params.id
     models.User.findByPk(id , 
      {include: 
-         [{model: models.Reservation}]
+         [{model: models.Hreservation}]
      }
      )
     .then( user =>{
@@ -18,24 +18,24 @@ router.get('/api/user/:id/hres', (req, res) => {
     .catch( e => console.log(e))
 });
 
-router.post('/api/user/:user_id/hall/:id', (req, res) => {
-    const hall_id = req.params.id
-    const user_id = req.params.user_id
+// router.post('/api/user/:user_id/hall/:id', (req, res) => {
+//     const hall_id = req.params.id
+//     const user_id = req.params.user_id
 
-    models.Hreservation.create({
-        user_id: user_id,
-        hall_id: hall_id,
-        date: req.body.date
-    })
-        .then(reservation => {
+//     models.Hreservation.create({
+//         user_id: user_id,
+//         hall_id: hall_id,
+//         date: req.body.date
+//     })
+//         .then(reservation => {
 
-            res.status(200).json({ reservation: reservation })
+//             res.status(200).json({ reservation: reservation })
 
 
 
-        }).catch(e => console.log(e));
+//         }).catch(e => console.log(e));
 
-});
+// });
 
 router.put('/api/hreservation/:id', (req, res) => {
     models.Reservation.findByPk(req.params.id)
@@ -57,7 +57,7 @@ router.put('/api/hreservation/:id', (req, res) => {
 
 });
 router.delete('/api/hreservation/:id', (req, res) => {
-    models.Reservation.findByPk(req.params.id)
+    models.Hreservation.findByPk(req.params.id)
         .then(reservation => {
 
             reservation.destroy().then(
@@ -71,6 +71,19 @@ router.delete('/api/hreservation/:id', (req, res) => {
 
 
 });
+router.post('/api/user/:user_id/hall/:id', (req, res) => {
+    const hall_id = req.params.id
+    const user_id = req.params.user_id
+    models.Hreservation.create({
+        hall_id: hall_id,
+        user_id: user_id,
+        date: req.body.date
+    })
+    .then(reservation => {
+        res.status(200).json({reservation: reservation})
+    })
+    .catch(e => console.log(e))
+})
 
 
   

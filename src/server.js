@@ -17,6 +17,7 @@ import userRoutes from "./routes/user_routes";
 import toolsRoutes from "./routes/toolsRoute";
 import hallsRoutes from "./routes/hallsRoute";
 import reservationsRoutes from "./routes/reservationsRoutes";
+import hreservationsRoutes from "./routes/hreservationsRoutes"
 
 // instantiate express application object
 const app = express();
@@ -45,7 +46,9 @@ app.use(exampleRoutes);
 app.use(userRoutes);
 app.use(toolsRoutes);
 app.use(hallsRoutes);
-app.use(reservationsRoutes)
+app.use(reservationsRoutes);
+app.use(hreservationsRoutes);
+
 // register error handling middleware
 // note that this comes after the route middlewares, because it needs to be
 // passed any error messages from them

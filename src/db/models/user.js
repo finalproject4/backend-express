@@ -55,6 +55,11 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "CASCADE"
 
       })
+      User.hasMany(models.Hreservation, {
+        foreignKey: "user_id",
+        onDelete: "CASCADE"
+
+      })
   };
   return User;
 };
