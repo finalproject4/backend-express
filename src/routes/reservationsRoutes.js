@@ -3,19 +3,44 @@ import models from '../db/models';
 
 const router = express.Router();
 
+// router.get('/api/user/:id/res', (req, res) => {
+ 
+   
+//     const id = req.params.id
+//     models.User.findByPk(id , 
+//      {include: 
+//          [{
+//              model: models.Reservation,
+//              as: "reservations"
+
+//         }]
+//      }
+//      )
+//     .then( user =>{
+//      res.status(200).json({user: user})
+//     })
+//     .catch( e => console.log(e))
+// });
 router.get('/api/user/:id/res', (req, res) => {
  
    
     const id = req.params.id
-    models.User.findByPk(id , 
-     {include: 
+    models.Tool.findAll(
+     {
+        attributes: ["type", "price"],
+         include: 
          [{
              model: models.Reservation,
-             as: "reservations"
+             as: "reservations",
+             attributes: ["date"],
 
-        }]
+
+        }],
+        where: {
+            "$reservations.user_id$": id
+        }
      }
-     )
+     )  
     .then( user =>{
      res.status(200).json({user: user})
     })
