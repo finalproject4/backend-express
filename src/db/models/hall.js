@@ -14,7 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     }),
     Hall.hasMany(models.Hreservation, {
       foreignKey: "hall_id",
-      onDelete: "CASCADE"
+      onDelete: "CASCADE",
+      as: "hreservations"
+
 
     })
   };

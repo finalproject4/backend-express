@@ -15,7 +15,8 @@ router.get('/api/tools', (req, res) => {
 
 router.get('/api/tool/:id', (req, res) => {
     models.Tool.findByPk(req.params.id,    
-        {include: [{model: models.Reservation}]
+        {include: [{model: models.Reservation,
+        as: "reservations"}]
     })
         .then(tool => {
 

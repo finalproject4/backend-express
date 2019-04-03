@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "user_id"
     })
     Reservation.belongsTo(models.Tool, {
-      foreignKey: "tool_id"
+      foreignKey: "tool_id",
+
     })
   };
   return Reservation;

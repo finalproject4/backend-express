@@ -9,7 +9,9 @@ router.get('/api/user/:id/hres', (req, res) => {
     const id = req.params.id
     models.User.findByPk(id , 
      {include: 
-         [{model: models.Hreservation}]
+         [{
+             model: models.Hreservation,
+        as: "hreservations"}]
      }
      )
     .then( user =>{
@@ -84,6 +86,45 @@ router.post('/api/user/:user_id/hall/:id', (req, res) => {
     })
     .catch(e => console.log(e))
 })
+
+router.delete('/api/reservations/:id', (req, res) => {
+    models.Reservation.findByPk(req.params.id)
+        .then(reservation => {
+
+            reservation.destroy().then(
+                res.status(200).json({result:`Reservation ID ${req.params.id} Deleted`})
+
+            )
+
+
+        }).catch(e => console.log(e));
+
+
+
+});
+
+router.get('/api/user/:id/cresh', (req, res) => {
+ 
+    const id = req.params.id
+    models.Hall.findAll({
+        attributes: ["type", "price", "name", "size", "location", "section"],
+        include: [
+          {
+            model: models.Hreservation,
+            attributes: ["date"],
+            as: "hreservations"
+          }
+        ],
+        where: {
+            user_id: id
+          }
+        
+      })
+    .then( user =>{
+     res.status(200).json({user: user})
+    })
+    .catch( e => console.log(e))
+});
 
 
   
