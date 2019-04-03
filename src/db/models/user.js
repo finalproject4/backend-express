@@ -52,12 +52,14 @@ module.exports = (sequelize, DataTypes) => {
     }),
       User.hasMany(models.Reservation, {
         foreignKey: "user_id",
-        onDelete: "CASCADE"
+        onDelete: "CASCADE",
+        as: "reservations"
 
       })
       User.hasMany(models.Hreservation, {
         foreignKey: "user_id",
-        onDelete: "CASCADE"
+        onDelete: "CASCADE",
+        as: "hreservations"
 
       })
   };

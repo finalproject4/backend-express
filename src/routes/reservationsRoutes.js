@@ -9,7 +9,11 @@ router.get('/api/user/:id/res', (req, res) => {
     const id = req.params.id
     models.User.findByPk(id , 
      {include: 
-         [{model: models.Reservation}]
+         [{
+             model: models.Reservation,
+             as: "reservations"
+
+        }]
      }
      )
     .then( user =>{
