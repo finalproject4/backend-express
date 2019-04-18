@@ -19,6 +19,31 @@ router.get('/api/user/:id/hres', (req, res) => {
     })
     .catch( e => console.log(e))
 });
+router.get('/api/user/:id/hresd', (req, res) => {
+ 
+   
+    const id = req.params.id
+    models.Hall.findAll(
+        {
+           attributes: ["type", "price", "name", "size", "section", "location"],
+            include: 
+            [{
+                model: models.Hreservation,
+                as: "hreservations",
+                attributes: ["date"],
+   
+   
+           }],
+           where: {
+               "$hreservations.user_id$": id
+           }
+        }
+        ) 
+    .then( user =>{
+     res.status(200).json({user: user})
+    })
+    .catch( e => console.log(e))
+});
 
 // router.post('/api/user/:user_id/hall/:id', (req, res) => {
 //     const hall_id = req.params.id

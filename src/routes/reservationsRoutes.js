@@ -21,6 +21,31 @@ router.get('/api/user/:id/res', (req, res) => {
     })
     .catch( e => console.log(e))
 });
+router.get('/api/user/:id/resd', (req, res) => {
+ 
+   
+    const id = req.params.id
+    models.Tool.findAll(
+     {
+        attributes: ["type", "price"],
+         include: 
+         [{
+             model: models.Reservation,
+             as: "reservations",
+             attributes: ["date"],
+
+
+        }],
+        where: {
+            "$reservations.user_id$": id
+        }
+     }
+     )  
+    .then( user =>{
+     res.status(200).json({user: user})
+    })
+    .catch( e => console.log(e))
+});
 
 router.post('/api/user/:user_id/tool/:id', (req, res) => {
     const tool_id = req.params.id
